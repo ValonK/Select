@@ -4,6 +4,39 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <Platforms>AnyCPU;x64</Platforms>
+    <ApplicationIcon>Assets\ic_logo_ico.ico</ApplicationIcon>
+    <Version>0.5</Version>
+    <Authors>Valon Kastrati</Authors>
+    <Company />
+    <Copyright>Valon Kastrati</Copyright>
+    <PackageProjectUrl>https://github.com/ValonK/Select</PackageProjectUrl>
+    <PackageIcon>ic_logo.png</PackageIcon>
+    <RepositoryUrl>https://github.com/ValonK/Select</RepositoryUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+    <PackageReference Include="InputSimulator" Version="1.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\ic_close.png" />
+    <None Remove="Assets\ic_logo_ico.ico" />
+    <None Include="Assets\ic_logo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <Resource Include="Assets\ic_close.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\ic_logo_ico.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controls" />
+  </ItemGroup>
 
 </Project>
