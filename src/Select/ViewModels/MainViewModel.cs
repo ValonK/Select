@@ -38,7 +38,7 @@ namespace Select.ViewModels
 
         #endregion
 
-        public async void Initialize()
+        public async void Start()
         {
             HookManager.MouseClick += HookManagerOnMouseClick;
             HookManager.MouseUp += HookManagerOnMouseUp;
@@ -46,7 +46,16 @@ namespace Select.ViewModels
             _clipboardService.TextReceived += ClipboardServiceOnTextReceived;
             await _clipboardService.StartAsync();
         }
-        
+
+        public void Stop()
+        {
+            HookManager.MouseClick -= HookManagerOnMouseClick;
+            HookManager.MouseUp -= HookManagerOnMouseUp;
+
+            _clipboardService.TextReceived -= ClipboardServiceOnTextReceived;
+            _clipboardService.Stop();
+        }
+
         #region Mouse
 
         private void HookManagerOnMouseClick(object sender, MouseEventArgs e)

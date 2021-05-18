@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Select.Views"
         xmlns:viewModels="clr-namespace:Select.ViewModels"
         mc:Ignorable="d"
-        Title="Settings" Height="400" Width="400" WindowStyle="ToolWindow" ShowInTaskbar="False">
+        Title="Settings" Height="300" Width="300" WindowStyle="ToolWindow" ShowInTaskbar="False">
     
     <Window.DataContext>
         <viewModels:SettingsViewModel/>
@@ -14,10 +14,10 @@
     
     <StackPanel Orientation="Vertical" Margin="20">
         
-        <CheckBox Content="  Start with Windows" 
-                  Foreground="Black" 
+        <CheckBox Content="  Start with Windows"
+                  Foreground="Black"
                   FontWeight="SemiBold"
                   Command="{Binding StartWindowsCheckedChangedCommand}"
-                  Checked="{Binding StartWithWindows, Mode=TwoWay}"/> 
+                  IsChecked="{Binding StartWithWindows}"/>
     </StackPanel>
 </Window>

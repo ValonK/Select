@@ -5,11 +5,11 @@ using System.Text.Json.Serialization;
 
 namespace Select.Helpers
 {
-    public class SettingsManager<T> where T : class
+    public class Settings<T> where T : class
     {
         private readonly string _filePath;
 
-        public SettingsManager(string fileName)
+        public Settings(string fileName)
         {
             _filePath = GetLocalFilePath(fileName);
         }

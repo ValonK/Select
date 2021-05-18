@@ -18,7 +18,7 @@ namespace Select.Views
         {
             if (DataContext is MainViewModel mainViewModel)
             {
-                mainViewModel?.Initialize();
+                mainViewModel?.Start();
             }
         }
     }

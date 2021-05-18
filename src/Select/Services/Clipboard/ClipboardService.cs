@@ -102,7 +102,7 @@ namespace Select.Services.Clipboard
 		public void Stop()
 		{
 			IsRunning = false;
-			_cancellationTokenSource.Cancel();
+			_cancellationTokenSource?.Cancel();
 		}
 
 		#endregion

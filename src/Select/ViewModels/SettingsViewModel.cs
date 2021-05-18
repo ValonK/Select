@@ -11,7 +11,7 @@ namespace Select.ViewModels
 	{
 		private readonly string _appBaseDir = Process.GetCurrentProcess().MainModule?.FileName;
 		private bool _startWithWindows;
-		private SettingsManager<UserSettings> _settingsManager;
+		private Settings<UserSettings> _settingsManager;
 		private UserSettings _userSettings = new();
 		
 		public SettingsViewModel()
@@ -30,7 +30,7 @@ namespace Select.ViewModels
 
 		private void Initialize()
 		{
-			_settingsManager = new SettingsManager<UserSettings>("select_settings.json");
+			_settingsManager = new Settings<UserSettings>("select_settings.json");
 			_userSettings = _settingsManager.LoadSettings();
 			_userSettings ??= new UserSettings();
 			

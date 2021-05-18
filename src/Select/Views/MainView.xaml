@@ -7,7 +7,10 @@
         xmlns:tb="http://www.hardcodet.net/taskbar"
         xmlns:viewModels="clr-namespace:Select.ViewModels"
         mc:Ignorable="d"
-        Title="MainView" WindowState="Minimized" ShowInTaskbar="False">
+        Title="MainView" 
+        WindowState="Minimized"
+        WindowStyle="None"
+        ShowInTaskbar="False">
 
 	<Window.DataContext>
 		<viewModels:MainViewModel/>
