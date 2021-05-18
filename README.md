@@ -4,7 +4,7 @@
 
 # Select
 
-[![Build](https://kastrati.visualstudio.com/Select/_apis/build/status/Select-.NET%20Desktop-CI)
+![Build](https://kastrati.visualstudio.com/Select/_apis/build/status/Select-.NET%20Desktop-CI)
 
 :star: Star us on GitHub — it motivates a lot!
 
