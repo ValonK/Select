@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Select.Service
+namespace Select.Services.Clipboard
 {
     public interface IClipboardService
     {
         Task StartAsync();
 
         event EventHandler<string> TextReceived;
+        
+        bool IsRunning { get; }
 
-        Task StopAsync();
+        void SendPaste();
+
+        void Stop();
     }
 }

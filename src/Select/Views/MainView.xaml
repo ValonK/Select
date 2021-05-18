@@ -4,9 +4,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Select.Views"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainView" WindowState="Minimized">
+
+	<Grid>
+		<tb:TaskbarIcon IconSource="../Assets/ic_logo_ico.ico"
+                        ToolTipText="Select - Select to Copy"
+                        MenuActivation="RightClick"
+                        PopupActivation="RightClick">
+			<tb:TaskbarIcon.TrayPopup>
+				<StackPanel Orientation="Vertical" Background="LightGray">
+
+					<MenuItem Header="Settings"/>
+					<MenuItem Header="About"/>
+					<Separator  />
+					<MenuItem Header="Exit">
+						<MenuItem.Icon>
+							<Image Width="16"
+						   Height="16"
+						   Source="../Assets/ic_close.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+				</StackPanel>
+			</tb:TaskbarIcon.TrayPopup>
+		</tb:TaskbarIcon>
+	</Grid>
 </Window>
