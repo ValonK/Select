@@ -5,9 +5,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Select.Views"
         xmlns:tb="http://www.hardcodet.net/taskbar"
+        xmlns:viewModels="clr-namespace:Select.ViewModels"
         mc:Ignorable="d"
-        Title="MainView" WindowState="Minimized">
+        Title="MainView" WindowState="Minimized" ShowInTaskbar="False">
 
+	<Window.DataContext>
+		<viewModels:MainViewModel/>
+	</Window.DataContext>
+	
 	<Grid>
 		<tb:TaskbarIcon IconSource="../Assets/ic_logo_ico.ico"
                         ToolTipText="Select - Select to Copy"
@@ -15,11 +20,16 @@
                         PopupActivation="RightClick">
 			<tb:TaskbarIcon.TrayPopup>
 				<StackPanel Orientation="Vertical" Background="LightGray">
-
-					<MenuItem Header="Settings"/>
-					<MenuItem Header="About"/>
+					
+					<MenuItem Header="Settings"  Command="{Binding SettingsCommand}">
+						<MenuItem.Icon>
+							<Image Width="16"
+							       Height="16"
+							       Source="../Assets/ic_settings.png" />
+						</MenuItem.Icon>
+					</MenuItem>
 					<Separator  />
-					<MenuItem Header="Exit">
+					<MenuItem Header="Exit" Command="{Binding ExitCommand}">
 						<MenuItem.Icon>
 							<Image Width="16"
 						   Height="16"

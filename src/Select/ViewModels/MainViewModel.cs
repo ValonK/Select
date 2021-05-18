@@ -5,80 +5,122 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using Select.Extensions;
+using Select.Helpers;
 using Select.Services.Clipboard;
 using Select.Services.Input;
+using Select.Views;
+using Application = System.Windows.Application;
 using Clipboard = System.Windows.Clipboard;
+using TextDataFormat = System.Windows.TextDataFormat;
 
 namespace Select.ViewModels
 {
-	public class MainViewModel
-	{
-		private readonly IClipboardService _clipboardService;
+    public class MainViewModel : BaseViewModel
+    {
+        #region Fields
 
-		public MainViewModel()
-		{
-			_clipboardService = new ClipboardService();
-		}
+        private readonly IClipboardService _clipboardService;
 
-		public async void Initialize()
-		{
-			HookManager.MouseDown += HookManagerOnMouseDown;
-			HookManager.MouseClick += HookManagerOnMouseClick;
-			HookManager.MouseUp += HookManagerOnMouseUp;
+        #endregion
 
-			_clipboardService.TextReceived += ClipboardServiceOnTextReceived;
-			await _clipboardService.StartAsync();
-		}
+        public MainViewModel()
+        {
+            _clipboardService = new ClipboardService();
 
-		private void HookManagerOnMouseClick(object sender, MouseEventArgs e)
-		{
-			if ((e.Button & MouseButtons.Middle) != 0)
-			{
-				 _clipboardService.SendPaste();
-			}
-		}
+            ExitCommand = new RelayCommand(OnExit);
+            SettingsCommand = new RelayCommand(OnSettings);
+        }
+        
+        #region Commands
 
-		private async void HookManagerOnMouseDown(object sender, MouseEventArgs e)
-		{
-			if (e.Button == MouseButtons.Left)
-			{
-				if (!_clipboardService.IsRunning)
-				{
-					Debug.WriteLine("START");
-					await _clipboardService.StartAsync();
-				}
-			}
-		}
+        public RelayCommand ExitCommand { get; }
+        public RelayCommand SettingsCommand { get; }
 
-		private async void HookManagerOnMouseUp(object sender, MouseEventArgs e)
-		{
-			if (e.Button == MouseButtons.Left)
-			{
-				if (_clipboardService.IsRunning)
-				{
-					Debug.WriteLine("STOP");
-					await _clipboardService.Stop();
-				}
-			}
-		}
+        #endregion
 
-		private async void ClipboardServiceOnTextReceived(object sender, string text)
-		{
-			if (!string.IsNullOrEmpty(text) && !text.HasLineBreaks())
-			{
-#if DEBUG
-				Debug.WriteLine($"Text received {text}");
-#endif
-				await Task.Delay(200);
+        public async void Initialize()
+        {
+            HookManager.MouseClick += HookManagerOnMouseClick;
+            HookManager.MouseUp += HookManagerOnMouseUp;
 
-				try
-				{
-					Clipboard.SetText(text, System.Windows.TextDataFormat.Text);
-				}
-				catch (Exception ex)
-				{
-				}
-			}
-		}
-	}
+            _clipboardService.TextReceived += ClipboardServiceOnTextReceived;
+            await _clipboardService.StartAsync();
+        }
+        
+        #region Mouse
+
+        private void HookManagerOnMouseClick(object sender, MouseEventArgs e)
+        {
+            if ((e.Button & MouseButtons.Middle) != 0)
+            {
+                _clipboardService.SendPaste();
+            }
+        }
+
+        private async void HookManagerOnMouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (!_clipboardService.IsRunning)
+                {
+                    await _clipboardService.StartAsync();
+                }
+            }
+        }
+
+        private async void HookManagerOnMouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (_clipboardService.IsRunning)
+                {
+                    _clipboardService.Stop();
+                }
+            }
+        }
+        
+
+        #endregion
+
+        #region Clipboards
+
+        private async void ClipboardServiceOnTextReceived(object sender, string text)
+        {
+            if (!string.IsNullOrEmpty(text) && !text.HasLineBreaks())
+            {
+                Debug.WriteLine(text);
+
+                await Task.Delay(200);
+
+                try
+                {
+                    Clipboard.SetText(text, TextDataFormat.Text);
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
+
+        #endregion
+
+        #region Settings
+
+        private async void OnSettings(object obj)
+        {
+            var settingsView = new SettingsView();
+            settingsView.ShowDialog();
+        }
+
+        #endregion
+        
+        #region Exit
+
+        private void OnExit(object obj)
+        {
+            Application.Current.Shutdown();
+        }
+
+        #endregion
+    }
 }

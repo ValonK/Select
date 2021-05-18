@@ -21,23 +21,29 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Assets\ic_close.png" />
-    <None Remove="Assets\ic_logo_ico.ico" />
-    <None Include="Assets\ic_logo.png">
+    <Resource Include="Assets\ic_logo.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
-    </None>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\ic_close.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\ic_logo_ico.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controls" />
     <Folder Include="Helpers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\ic_settings.png" />
+    <Resource Include="Assets\ic_settings.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
